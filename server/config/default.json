@@ -1,0 +1,34 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 500,
+    "max": 1000
+  },
+  "authentication": {
+    "secret": "791fec0750ffad9ce0866cc3a93f4236efc745c046ca1f572b88c1ad93c62bbbb44cf4423f990bdc736885d3b3b692b515cbb0c37920f22e59b566885621513b85e2f4dbe6e95a7b7456a22d8731d6b5161d1bc199f5fbfbc864fcfc6fba9b55d1f82e7c1480bca41275207cbacd1618004fc0d29b83003868806f4c881ab608555717f69c302dab283d42373c5fdd01bda241641baa05b293dd63a214b4bfcf9a8451401fa2afcef99e8ea24dddee0721dba0f927e58292869280149dda3e36d979c312f8d94939fa1725a61bdca83f1d4af95ef4e109f88ec6ed4c4c78acadaeb1834765399f6860e5fb8adf33d3767029ad5a2196da8aad64abfc6c293d42",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://board.robertleap.com",
+      "subject": "auth",
+      "issuer": "robertleap.com",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "username",
+      "passwordField": "password"
+    }
+  },
+  "mongodb": "mongodb://localhost:27017/trello_clone_server"
+}
