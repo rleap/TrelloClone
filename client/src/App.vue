@@ -3,6 +3,15 @@
     <v-toolbar
       app
     >
+    <v-toolbar-title>Trello Clone</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-toolbar-items v-if="!user">
+      <v-btn flat :to="{ name: 'login' }">Login</v-btn>
+      <v-btn flat :to="{ name: 'signup' }">SignUp</v-btn>
+    </v-toolbar-items>
+    <v-toolbar-items v-if="user">
+      <v-btn flat @click="logout">Logout</v-btn>
+    </v-toolbar-items>
     </v-toolbar>
     <v-content>
       <router-view/>
@@ -14,23 +23,23 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'App',
   data() {
     return {
-      clipped: false,
-      drawer: true,
       fixed: false,
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Inspire',
-      }],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js',
     };
+  },
+  computed: {
+    ...mapState('auth', { user: 'payload' }),
+  },
+  methods: {
+    ...mapActions('auth', { authLogout: 'logout' }),
+    logout() {
+      this.authLogout().then(() => this.$router.push('/login'));
+    },
   },
 };
 </script>
